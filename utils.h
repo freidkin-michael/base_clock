@@ -5,15 +5,13 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-#define HEADER 0xDEADBEE1
+#define HEADER 0xDEADBEEF
 
 struct config_t
 {
   uint32_t header = HEADER;
-  char topic[40] = "common";
   uint32_t language = 1;
   uint32_t brightness = 50;
-  uint32_t data = 0;
   config_t()
   {
     header = HEADER;
@@ -22,10 +20,10 @@ struct config_t
 
 void InitConfig();
 void SaveConfig(config_t config);
+
 void ConfigPortal();
 void setupWiFi();
 
-void HandleConfigData();
 time_t GetEpoch();
 extern config_t g_config;
 
@@ -73,10 +71,6 @@ public:
                 doc["dst_offset"].as<uint32_t>();
 
     http.end();
-
-    // time_t time= (time_t)epoch_utc;
-
-    // setTime(epoch_utc);
 
     return epoch_utc;
   }

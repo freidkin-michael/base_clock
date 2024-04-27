@@ -2,7 +2,6 @@
 #include "utils.h"
 
 WiFiManager wifiManager;
-WiFiManagerParameter topicField("topic", "MQTT Topic", "fraddy", 40);
 WiFiManagerParameter brightnessField("brightness", "Brightness %", "50", 3);
 WiFiManagerParameter languageField("language", "Language", "Eng", 10);
 
@@ -21,7 +20,6 @@ void setupWiFi()
     Serial.printf("Init start B %d; L %d\n", g_config.brightness, g_config.language);
     languageField.setValue(String(g_config.brightness).c_str(), 3);
     languageField.setValue(String(g_config.language).c_str(), 10);
-    wifiManager.addParameter(&topicField);
     wifiManager.addParameter(&brightnessField);
     wifiManager.addParameter(&languageField);
     wifiManager.setClass("invert");
