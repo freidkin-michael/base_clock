@@ -21,7 +21,6 @@ struct config_t
 void InitConfig();
 void SaveConfig(config_t config);
 
-void ConfigPortal();
 void setupWiFi();
 
 time_t GetEpoch();

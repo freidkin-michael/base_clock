@@ -10,31 +10,29 @@ void saveParamCallback()
     Serial.printf("\nSave Data: B %d\n", atoi(brightnessField.getValue()));
     config_t config;
     config.brightness = atoi(brightnessField.getValue());
+    if (config.brightness < 0 || config.brightness > 100)
+    {
+        // If value not in the range - revert back value and return
+        brightnessField.setValue(String(g_config.brightness).c_str(), 3);
+        return;
+    }
+
     config.language = atoi(languageField.getValue());
+
+    brightnessField.setValue(String(g_config.brightness).c_str(), 3);
+    languageField.setValue(String(g_config.language).c_str(), 10);
     SaveConfig(config);
 }
 
 void setupWiFi()
 {
-    Serial.println("Start autoconnect");
-    Serial.printf("Init start B %d; L %d\n", g_config.brightness, g_config.language);
-    languageField.setValue(String(g_config.brightness).c_str(), 3);
+    brightnessField.setValue(String(g_config.brightness).c_str(), 3);
     languageField.setValue(String(g_config.language).c_str(), 10);
     wifiManager.addParameter(&brightnessField);
     wifiManager.addParameter(&languageField);
+
+    wifiManager.setSaveParamsCallback(saveParamCallback);
     wifiManager.setClass("invert");
     wifiManager.autoConnect(("ClockAP_" + Utils::GetName()).c_str());
     Serial.println("Connected");
-    wifiManager.setSaveParamsCallback(saveParamCallback);
-}
-void ConfigPortal()
-{
-    Serial.println("Start config");
-    Serial.printf("Config \n");
-    Serial.println(String(g_config.brightness));
-    Serial.println(String(g_config.language));
-    brightnessField.setValue(String(g_config.brightness).c_str(), 3);
-    languageField.setValue(String(g_config.language).c_str(), 10);
-    wifiManager.setConfigPortalBlocking(true);
-    wifiManager.startConfigPortal("Config");
 }
