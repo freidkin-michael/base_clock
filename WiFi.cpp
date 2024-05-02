@@ -44,12 +44,12 @@ void saveParamCallback()
     SaveConfig(config);
 }
 
-void setupWiFi()
+void SetupWiFi()
 {
     wifiManager.addParameter(&custom_html_inputs);
 
     wifiManager.setSaveParamsCallback(saveParamCallback);
     wifiManager.setClass("invert");
-    wifiManager.autoConnect(("ClockAP_" + Utils::GetName()).c_str());
+    wifiManager.autoConnect(("ClockAP_" + GetName()).c_str());
     Serial.println("Connected");
 }
