@@ -39,7 +39,7 @@ void setup()
 
   InitConfig();
 
-  setupWiFi();
+  SetupWiFi();
 
   // Initialize time
   epoch_utc = GetEpoch();
@@ -49,9 +49,9 @@ void setup()
 
 void loop()
 {
-  // Handle each second update time handler
+  // Each second update time handler
   update_time.handle();
-  // If config portal is stated - just handle it
+  // If config portal started - just handle it
   if (wifiManager.getConfigPortalActive())
   {
     wifiManager.process();

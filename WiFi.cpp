@@ -31,25 +31,25 @@ String getParam(String name)
 }
 void saveParamCallback()
 {
+    // Read updated values from server
     String language = getParam("language");
     String brightness = getParam("brightness");
     Serial.printf("language: %s\n", language.c_str());
     Serial.printf("brightness: %s\n", brightness.c_str());
 
+    // Update config with those values
     config_t config;
     config.brightness = atoi(brightness.c_str());
-
     config.language = atoi(language.c_str());
-
     SaveConfig(config);
 }
 
-void setupWiFi()
+void SetupWiFi()
 {
     wifiManager.addParameter(&custom_html_inputs);
 
     wifiManager.setSaveParamsCallback(saveParamCallback);
     wifiManager.setClass("invert");
-    wifiManager.autoConnect(("ClockAP_" + Utils::GetName()).c_str());
+    wifiManager.autoConnect(("ClockAP_" + GetName()).c_str());
     Serial.println("Connected");
 }

@@ -16,7 +16,7 @@ void InitConfig()
   {
     Serial.printf("Init  Data\n");
     EEPROM.put(0, g_config);
-    EEPROM.commit(); // для esp8266/esp32
+    EEPROM.commit();
   }
   EEPROM.get(0, g_config);
   Serial.printf("Get data B %d; L %d\n", g_config.brightness, g_config.language);
