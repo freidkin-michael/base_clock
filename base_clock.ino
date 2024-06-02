@@ -5,10 +5,6 @@
 #include <GyverMAX7219.h>
 
 #include "utils.h"
-extern WiFiManager wifiManager;
-extern void MatrixBegin(void);
-extern void MatrixBrightness(uint8_t);
-extern void MatrixPrint(String, String);
 
 #define CONFIG_PIN D3
 time_t epoch_utc = 0;
